@@ -12,8 +12,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self initVariables];
     return YES;
+}
+
+- (void)initVariables {
+    
+    screenSize = [[UIScreen mainScreen] bounds].size;
+    
+    players = [NSMutableArray array];
+    selectionType = -1;
+    
+    SELECTION_TYPE_RANDOM = 0;
+    SELECTION_TYPE_SKILL  = 1;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

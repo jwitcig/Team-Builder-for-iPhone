@@ -13,3 +13,11 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @end
+
+CGSize screenSize;
+
+NSMutableArray *players;
+int selectionType;
+
+int SELECTION_TYPE_RANDOM;
+int SELECTION_TYPE_SKILL;
