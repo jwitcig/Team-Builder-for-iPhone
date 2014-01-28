@@ -12,6 +12,8 @@
 
 #import "Player.h"
 
+#import "ResultViewController.h"
+
 @interface PlayersViewController : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;

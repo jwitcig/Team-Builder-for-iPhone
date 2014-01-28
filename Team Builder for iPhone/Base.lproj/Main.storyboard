@@ -19,7 +19,7 @@
             </objects>
             <point key="canvasLocation" x="110" y="304"/>
         </scene>
-        <!--Type Selection View Controller-->
+        <!--Type Selection View Controller - Team Builder-->
         <scene sceneID="RKP-ze-saj">
             <objects>
                 <viewController id="fRR-N0-vNX" customClass="TypeSelectionViewController" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TnJ-gM-5rB">
-                                <rect key="frame" x="0.0" y="167" width="320" height="30"/>
+                                <rect key="frame" x="0.0" y="225" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Random">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH9-vf-Kpx">
-                                <rect key="frame" x="0.0" y="317" width="320" height="30"/>
+                                <rect key="frame" x="0.0" y="263" width="320" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Skill-Based">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -53,19 +53,30 @@
                                     <segue destination="xYf-jv-crD" kind="push" id="mGq-Q1-6Xj"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_launcher.png" translatesAutoresizingMaskIntoConstraints="NO" id="pIT-Ag-AcT">
+                                <rect key="frame" x="140" y="91" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Selection Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8q-KK-ARQ">
+                                <rect key="frame" x="104" y="196" width="112" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="K4o-Hl-KWq"/>
+                    <navigationItem key="navigationItem" title="Team Builder" id="K4o-Hl-KWq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="An5-ep-Xc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="580" y="304"/>
         </scene>
-        <!--Result View Controller-->
+        <!--Result View Controller - Team Builder-->
         <scene sceneID="yQu-xx-XQP">
             <objects>
-                <viewController id="wWj-ob-0U1" customClass="ResultViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultViewController" id="wWj-ob-0U1" customClass="ResultViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y9i-FO-tRI"/>
                         <viewControllerLayoutGuide type="bottom" id="C9T-Bq-8pQ"/>
@@ -73,16 +84,16 @@
                     <view key="view" contentMode="scaleToFill" id="deN-Dh-Vjm">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="MmV-MJ-oEn"/>
+                    <navigationItem key="navigationItem" title="Team Builder" id="MmV-MJ-oEn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPw-4V-yFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1586" y="304"/>
         </scene>
-        <!--Players View Controller-->
+        <!--Players View Controller - Team Builder-->
         <scene sceneID="Vmn-KG-n2G">
             <objects>
                 <viewController id="xYf-jv-crD" customClass="PlayersViewController" sceneMemberID="viewController">
@@ -102,18 +113,18 @@
                                 </state>
                                 <connections>
                                     <action selector="continuePressed:" destination="xYf-jv-crD" eventType="touchUpInside" id="NpM-99-quP"/>
-                                    <segue destination="wWj-ob-0U1" kind="push" id="woY-fk-HPz"/>
+                                    <segue destination="wWj-ob-0U1" kind="push" id="6c7-jy-uN9"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6IX-wu-Mff" secondAttribute="bottom" id="Y2F-UQ-Hn4"/>
                             <constraint firstItem="6IX-wu-Mff" firstAttribute="centerX" secondItem="q7c-Dz-hD8" secondAttribute="centerX" id="gye-5X-qwW"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="5jd-rP-0pL"/>
+                    <navigationItem key="navigationItem" title="Team Builder" id="5jd-rP-0pL"/>
                     <connections>
                         <outlet property="continueButton" destination="6IX-wu-Mff" id="guh-XH-8zM"/>
                     </connections>
@@ -123,6 +134,9 @@
             <point key="canvasLocation" x="1105" y="304"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_launcher.png" width="72" height="72"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

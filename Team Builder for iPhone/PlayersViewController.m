@@ -16,7 +16,7 @@
     UITextField *textFieldInEdit;
     UIStepper *playerCountStepper;
     
-    NSMutableArray *existingPlayersNames;
+    NSMutableArray *existingInformation;
 }
 
 @synthesize continueButton;
@@ -24,14 +24,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     textFieldInEdit = [[UITextField alloc] init];
+    continueButton.enabled = NO;
+    continueButton.alpha = 0.4f;
     
-    existingPlayersNames = [NSMutableArray array];
+    [self clearExistingInformation];
     
     [self addPlayerCountStepper];
     [self buildEntryFormForNumberOfPlayers:playerCountStepper.value];
     
     UIGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainViewTap)];
     [self.view addGestureRecognizer:tapRecognizer];
+}
+
+- (void)clearExistingInformation {
+    existingInformation = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], nil];
 }
 
 - (void)addPlayerCountStepper {
@@ -57,8 +63,16 @@
         nameField.delegate = self;
         nameField.backgroundColor = [UIColor lightGrayColor];
         nameField.tag = playerHolder.tag+100;
-        if (i < existingPlayersNames.count)
-            nameField.text = [existingPlayersNames objectAtIndex:i];
+        nameField.text = @"";
+        [nameField addTarget:self action:@selector(nameFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+        
+        NSArray *existingNames = [NSArray arrayWithArray:[existingInformation objectAtIndex:0]];
+        NSArray *existingSkills = [NSArray arrayWithArray:[existingInformation objectAtIndex:1]];
+        
+        NSLog(@"%@ : %i", existingNames, existingNames.count);
+        
+        if (i < existingNames.count)
+            nameField.text = [existingNames objectAtIndex:i];
         playerHolderWidth = CGRectGetMaxX(nameField.frame);
         
         if (selectionType == SELECTION_TYPE_SKILL) {
@@ -67,6 +81,9 @@
             skillField.backgroundColor = [UIColor lightGrayColor];
             skillField.keyboardType = UIKeyboardTypeNumberPad;
             skillField.tag = playerHolder.tag+1000;
+            skillField.text = @"0";
+            if (i < existingSkills.count)
+                skillField.text = [[existingSkills objectAtIndex:i] stringValue];
             
             [playerHolder addSubview:skillField];
             playerHolderWidth = CGRectGetMaxX(skillField.frame);
@@ -85,7 +102,7 @@
 - (BOOL)completionTest {
     BOOL pass = YES;
     
-    existingPlayersNames = [NSMutableArray array];
+    [self clearExistingInformation];
     UIScrollView *scroller = (UIScrollView *)[self.view viewWithTag:-2];
     
     for (UIView *playerHolder in scroller.subviews) {
@@ -97,18 +114,31 @@
 }
 
 - (void)playerCountChanged:(UIStepper *)stepper {
-    existingPlayersNames = [NSMutableArray array];
+    [self clearExistingInformation];
     UIScrollView *scroller = (UIScrollView *)[self.view viewWithTag:-2];
     
     for (UIView *playerHolder in scroller.subviews) {
         UITextField *nameField = (UITextField *)[playerHolder viewWithTag:playerHolder.tag+100];
-        if ([nameField.text isEqualToString:@""] || [nameField.text isEqualToString:nil]) {
+        UITextField *skillField = (UITextField *)[playerHolder viewWithTag:playerHolder.tag+1000];
+        
+        if ([nameField.text isEqualToString:@""] || nameField.text == nil)
             NSLog(@"fixed");
-            nameField.text = @"aaa";
-        }
         else
             NSLog(@"completed %@", nameField.text);
-        [existingPlayersNames addObject:nameField.text];
+        
+        if (nameField.text != nil) {
+            NSMutableArray *existingNames = [NSMutableArray arrayWithArray:[existingInformation objectAtIndex:0]];
+            [existingNames addObject:nameField.text];
+            [existingInformation replaceObjectAtIndex:0 withObject:existingNames];
+        }
+        if (skillField.text != nil) {
+            NSMutableArray *existingSkills = [NSMutableArray arrayWithArray:[existingInformation objectAtIndex:1]];
+            [existingSkills addObject:[NSNumber numberWithInt:skillField.text.intValue]];
+            [existingInformation replaceObjectAtIndex:1 withObject:existingSkills];
+        }
+        
+        
+        NSLog(@"%@ : %i", [existingInformation objectAtIndex:0], [[existingInformation objectAtIndex:0] count]);
     }
     
     for (UIView *view in scroller.subviews) {
@@ -128,6 +158,17 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     textFieldInEdit = textField;
     NSLog(@"selected");
+}
+
+- (void)nameFieldTextChanged:(UITextField *)textField {
+    if ([self completionTest]) {
+        continueButton.enabled = YES;
+        continueButton.alpha = 1.0f;
+    } else {
+        continueButton.enabled = NO;
+        continueButton.alpha = 0.4f;
+    }
+    
 }
 
 - (IBAction)continuePressed:(UIButton *)button {
@@ -150,6 +191,13 @@
                 }
             }
         }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incomplete Form"
+                                                        message:@"One or more fields have not been filled out properly."
+                                                       delegate:self
+                                              cancelButtonTitle:@"ok"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
     
     for (Player *player in players) {

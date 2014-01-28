@@ -25,8 +25,32 @@
     if (selectionType == SELECTION_TYPE_RANDOM) {
         NSArray *randomPlayersList = [NSArray arrayWithArray:[self generateRandomTeams]];
         [self buildFormsForPlayers:randomPlayersList];
+    } else if (selectionType == SELECTION_TYPE_SKILL) {
+        NSMutableArray *combos = [NSMutableArray arrayWithArray:[self powerSet:players]];
+        combos = [NSMutableArray arrayWithArray:[self trimNonusableCombos:combos]];
+        
+        int lowestDifference = 10000000;
+        int bestComboIndex = -1;
+        for (NSArray *combo in combos) {
+            NSLog(@"%i", [self comboScoreDifference:[self addOpponentToCombo:combo]]);
+            
+            int difference = [self comboScoreDifference:[self addOpponentToCombo:combo]];
+            if (difference < lowestDifference) {
+                lowestDifference = difference;
+                bestComboIndex = [combos indexOfObject:combo];
+            }
+        }
+        
+        NSArray *bestCombo = [self addOpponentToCombo:[combos objectAtIndex:bestComboIndex]];
+        NSMutableArray *playersList = [NSMutableArray array];
+        [playersList addObjectsFromArray:[bestCombo firstObject]];
+        [playersList addObjectsFromArray:[bestCombo lastObject]];
+        for (Player *player in playersList)
+            NSLog(@"%@", player.name);
+        
+        [self buildFormsForPlayers:playersList];
     }
-    NSLog(@"loaded");
+    /*
     players = [NSMutableArray array];
     
     Player *player = [[Player alloc] init];
@@ -57,34 +81,11 @@
     player.name = @"Nic";
     player.skill = 4;
     [players addObject:player];
+     */
     
-    NSMutableArray *combos = [NSMutableArray arrayWithArray:[self powerSet:players]];
-    combos = [NSMutableArray arrayWithArray:[self trimNonusableCombos:combos]];
     
-    int lowestDifference = 10000000;
-    int bestComboIndex = -1;
-    for (NSArray *combo in combos) {
-        NSLog(@"%i", [self comboScoreDifference:[self addOpponentToCombo:combo]]);
-        
-        int difference = [self comboScoreDifference:[self addOpponentToCombo:combo]];
-        if (difference < lowestDifference) {
-            lowestDifference = difference;
-            bestComboIndex = [combos indexOfObject:combo];
-        }
-    }
     
-    NSArray *bestCombo = [self addOpponentToCombo:[combos objectAtIndex:bestComboIndex]];
-    NSMutableArray *playersList = [NSMutableArray array];
-    [playersList addObjectsFromArray:[bestCombo firstObject]];
-    [playersList addObjectsFromArray:[bestCombo lastObject]];
-    for (Player *player in playersList) {
-        
-        NSLog(@"%@", player.name);
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"appear");
+    
 }
 
 - (NSArray *)addOpponentToCombo:(NSArray *)teamOne {
@@ -138,11 +139,20 @@
         UILabel *nameDisplay = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenSize.height/3, 20)];
         nameDisplay.text = [(Player *)[playersList objectAtIndex:i] name];
         nameDisplay.tag = i+1;
+        nameDisplay.textColor = [UIColor whiteColor];
         playerHolderWidth = CGRectGetMaxX(nameDisplay.frame);
-        
         
         playerHolder.frame = CGRectMake(CGRectGetMidX(scroller.frame)-(playerHolderWidth/2), (controller*30)+40, playerHolderWidth, 20);
         [playerHolder addSubview:nameDisplay];
+        
+        if (selectionType == SELECTION_TYPE_SKILL) {
+            UILabel *skillDisplay = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameDisplay.frame), 0, screenSize.height/4, 20)];
+            skillDisplay.text = [NSString stringWithFormat:@"%i", [(Player *)[playersList objectAtIndex:i] skill]];
+            skillDisplay.tag = i+1;
+            skillDisplay.textColor = [UIColor whiteColor];
+            playerHolderWidth = CGRectGetMaxX(skillDisplay.frame);
+            [playerHolder addSubview:skillDisplay];
+        }
         
         [scroller addSubview:playerHolder];
         scroller.contentSize = CGSizeMake(CGRectGetWidth(scroller.frame), CGRectGetMaxY(playerHolder.frame)+10);
@@ -151,11 +161,13 @@
             UILabel *teamLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(scroller.frame)-(100), ((controller-1)*30)+40, 100, 20)];
             teamLabel.text = @"Team 1";
             teamLabel.font = [UIFont boldSystemFontOfSize:teamLabel.font.pointSize];
+            teamLabel.textColor = [UIColor lightGrayColor];
             [scroller addSubview:teamLabel];
         } else if (i == (players.count/2)) {
             UILabel *teamLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(scroller.frame)-(100), ((i )*30)+40, 100, 20)];
             teamLabel.text = @"Team 2";
             teamLabel.font = [UIFont boldSystemFontOfSize:teamLabel.font.pointSize];
+            teamLabel.textColor = [UIColor lightGrayColor];
             [scroller addSubview:teamLabel];
         }
     }

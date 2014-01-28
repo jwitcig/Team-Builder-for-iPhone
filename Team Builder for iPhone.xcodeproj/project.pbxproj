@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B4E87EC189757CF00879FB5 /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B4E87EB189757CF00879FB5 /* ic_launcher.png */; };
 		8B52185B1878A6DB00BCE0DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B52185A1878A6DB00BCE0DB /* Foundation.framework */; };
 		8B52185D1878A6DB00BCE0DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B52185C1878A6DB00BCE0DB /* CoreGraphics.framework */; };
 		8B52185F1878A6DB00BCE0DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B52185E1878A6DB00BCE0DB /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B4E87EB189757CF00879FB5 /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		8B5218571878A6DB00BCE0DB /* Team Builder for iPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team Builder for iPhone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B52185A1878A6DB00BCE0DB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8B52185C1878A6DB00BCE0DB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -141,6 +143,7 @@
 		8B5218611878A6DB00BCE0DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8B4E87EB189757CF00879FB5 /* ic_launcher.png */,
 				8B5218621878A6DB00BCE0DB /* Team Builder for iPhone-Info.plist */,
 				8B5218631878A6DB00BCE0DB /* InfoPlist.strings */,
 				8B5218661878A6DB00BCE0DB /* main.m */,
@@ -246,6 +249,7 @@
 				8B5218731878A6DB00BCE0DB /* Images.xcassets in Resources */,
 				8B5218651878A6DB00BCE0DB /* InfoPlist.strings in Resources */,
 				8B52186E1878A6DB00BCE0DB /* Main.storyboard in Resources */,
+				8B4E87EC189757CF00879FB5 /* ic_launcher.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
