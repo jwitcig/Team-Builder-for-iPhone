@@ -8,7 +8,9 @@
 
 #import "TypeSelectionViewController.h"
 
-@interface TypeSelectionViewController ()
+@interface TypeSelectionViewController () {
+    BOOL bannerIsVisible;
+}
 
 @end
 
@@ -26,6 +28,39 @@
 - (IBAction)skillBasedPressed:(UIButton *)button {
     NSLog(@"skill");
     selectionType = SELECTION_TYPE_SKILL;
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    if (!bannerIsVisible) {
+        
+        NSLog(@"bannerViewDidLoadAd");
+        
+        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+    
+        banner.frame = CGRectOffset(banner.frame, 0, -50);
+        
+        [UIView commitAnimations];
+        
+        bannerIsVisible = YES;
+        
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    if (bannerIsVisible) {
+        
+        NSLog(@"bannerView:didFailToReceiveAdWithError:");
+        
+        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+        
+        // assumes the banner view is at the top of the screen.
+        
+        banner.frame = CGRectOffset(banner.frame, 0, 50);
+        
+        [UIView commitAnimations];
+        
+        bannerIsVisible = NO;
+    }
 }
 
 @end

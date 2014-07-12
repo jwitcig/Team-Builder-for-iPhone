@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
+#import <iAd/ADBannerView.h>
 
 #import "Player.h"
 
 #import "ResultViewController.h"
 
-@interface PlayersViewController : UIViewController <UITextFieldDelegate>
+@interface PlayersViewController : UIViewController <UITextFieldDelegate, ADBannerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
+@property (retain) IBOutlet ADBannerView *banner;
 
 - (IBAction)continuePressed:(UIButton *)button;
 

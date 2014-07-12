@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
+#import <iAd/ADBannerView.h>
 
-@interface TypeSelectionViewController : UIViewController
+@interface TypeSelectionViewController : UIViewController <ADBannerViewDelegate>
 
 - (IBAction)randomPressed:(UIButton *)button;
 - (IBAction)skillBasedPressed:(UIButton *)button;
+
+@property (retain) IBOutlet ADBannerView *banner;
 
 @end

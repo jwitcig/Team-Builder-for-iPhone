@@ -14,6 +14,8 @@
 
 @implementation ResultViewController {
     NSMutableArray *generatedPlayersList;
+    
+    BOOL bannerIsVisible;
 }
 
 - (void)viewDidLoad {
@@ -124,7 +126,7 @@
 }
 
 - (void)buildFormsForPlayers:(NSArray *)playersList {
-    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height-64))];
+    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height-64-self.banner.frame.size.height))];
     
     int playerHolderWidth = 0;
     int controller = 0;
@@ -215,6 +217,45 @@
             [powerset addObject:[lessOneElement arrayByAddingObject:lastObject]];
     }
     return [NSArray arrayWithArray:powerset];
+}
+
+
+- (IBAction)skillBasedPressed:(UIButton *)button {
+    NSLog(@"skill");
+    selectionType = SELECTION_TYPE_SKILL;
+}
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    if (!bannerIsVisible) {
+        
+        NSLog(@"bannerViewDidLoadAd");
+        
+        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+        
+        banner.frame = CGRectOffset(banner.frame, 0, -50);
+        
+        [UIView commitAnimations];
+        
+        bannerIsVisible = YES;
+        
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    if (bannerIsVisible) {
+        
+        NSLog(@"bannerView:didFailToReceiveAdWithError:");
+        
+        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+        
+        // assumes the banner view is at the top of the screen.
+        
+        banner.frame = CGRectOffset(banner.frame, 0, 50);
+        
+        [UIView commitAnimations];
+        
+        bannerIsVisible = NO;
+    }
 }
 
 @end
