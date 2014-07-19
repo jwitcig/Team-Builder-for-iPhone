@@ -20,6 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    bannerIsVisible = NO;
+    self.banner.delegate = self;
+    
     generatedPlayersList = [NSMutableArray array];
     
     self.navigationItem.title = @"Team Builder";
@@ -227,34 +231,19 @@
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner {
     if (!bannerIsVisible) {
-        
         NSLog(@"bannerViewDidLoadAd");
         
-        [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
-        
-        banner.frame = CGRectOffset(banner.frame, 0, -50);
-        
-        [UIView commitAnimations];
-        
         bannerIsVisible = YES;
-        
+        banner.hidden = NO;
     }
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
     if (bannerIsVisible) {
-        
         NSLog(@"bannerView:didFailToReceiveAdWithError:");
         
-        [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
-        
-        // assumes the banner view is at the top of the screen.
-        
-        banner.frame = CGRectOffset(banner.frame, 0, 50);
-        
-        [UIView commitAnimations];
-        
         bannerIsVisible = NO;
+        banner.hidden = YES;
     }
 }
 

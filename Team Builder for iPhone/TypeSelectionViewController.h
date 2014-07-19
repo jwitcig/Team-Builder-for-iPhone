@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
-#import <iAd/ADBannerView.h>
+
+#import <iAd/iAd.h>
 
 @interface TypeSelectionViewController : UIViewController <ADBannerViewDelegate>
 
