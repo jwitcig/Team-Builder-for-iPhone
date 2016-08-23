@@ -9,12 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
-#import <iAd/ADBannerView.h>
 
 #import "Player.h"
 
-@interface ResultViewController : UIViewController <ADBannerViewDelegate>
-
-@property (retain) IBOutlet ADBannerView *banner;
+@interface ResultViewController : UIViewController
 
 @end

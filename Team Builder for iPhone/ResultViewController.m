@@ -14,19 +14,12 @@
 
 @implementation ResultViewController {
     NSMutableArray *generatedPlayersList;
-    
-    BOOL bannerIsVisible;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    bannerIsVisible = NO;
-    self.banner.delegate = self;
-    
     generatedPlayersList = [NSMutableArray array];
-    
-    self.navigationItem.title = @"Team Builder";
     
     if (selectionType == SELECTION_TYPE_RANDOM) {
         NSArray *randomPlayersList = [NSArray arrayWithArray:[self generateRandomTeams]];
@@ -36,10 +29,8 @@
         combos = [NSMutableArray arrayWithArray:[self trimNonusableCombos:combos]];
         
         int lowestDifference = 10000000;
-        int bestComboIndex = -1;
+        NSUInteger bestComboIndex = -1;
         for (NSArray *combo in combos) {
-            NSLog(@"%i", [self comboScoreDifference:[self addOpponentToCombo:combo]]);
-            
             int difference = [self comboScoreDifference:[self addOpponentToCombo:combo]];
             if (difference < lowestDifference) {
                 lowestDifference = difference;
@@ -56,41 +47,6 @@
         
         [self buildFormsForPlayers:playersList];
     }
-    /*
-    players = [NSMutableArray array];
-    
-    Player *player = [[Player alloc] init];
-    player.name = @"Jonah";
-    player.skill = 10;
-    [players addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Ryann";
-    player.skill = 8;
-    [players addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Cole";
-    player.skill = 6;
-    [players addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Quintin";
-    player.skill = 5;
-    [players addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Josh";
-    player.skill = 3;
-    [players addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Jordan";
-    player.skill = 2;
-    [players addObject:player];
-    player = [[Player alloc] init];
-    player.name = @"Nic";
-    player.skill = 4;
-    [players addObject:player];
-     */
-    
-    
-    
     
 }
 
@@ -130,7 +86,7 @@
 }
 
 - (void)buildFormsForPlayers:(NSArray *)playersList {
-    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height-64-self.banner.frame.size.height))];
+    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height-64))];
     
     int playerHolderWidth = 0;
     int controller = 0;
@@ -195,7 +151,6 @@
         [randomOrder addObject:[startPlayers objectAtIndex:randomSelection]];
         [startPlayers removeObjectAtIndex:randomSelection];
     }
-    NSLog(@"generated players : %@", [self namesFromPlayersArray:randomOrder]);
     return randomOrder;
 }
 
@@ -225,26 +180,7 @@
 
 
 - (IBAction)skillBasedPressed:(UIButton *)button {
-    NSLog(@"skill");
     selectionType = SELECTION_TYPE_SKILL;
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
-    if (!bannerIsVisible) {
-        NSLog(@"bannerViewDidLoadAd");
-        
-        bannerIsVisible = YES;
-        banner.hidden = NO;
-    }
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    if (bannerIsVisible) {
-        NSLog(@"bannerView:didFailToReceiveAdWithError:");
-        
-        bannerIsVisible = NO;
-        banner.hidden = YES;
-    }
 }
 
 @end

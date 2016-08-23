@@ -8,18 +8,23 @@
 
 #import "PlayersViewController.h"
 
+#import "PlayerHolder.h"
+
 @interface PlayersViewController ()
 
 @end
 
 @implementation PlayersViewController {
     UITextField *textFieldInEdit;
-    UIStepper *playerCountStepper;
+    int playerCount;
     
-    NSMutableArray *existingInformation;
-    
-    BOOL bannerIsVisible;
+    NSMutableArray *playerHolders;
 }
+
+@synthesize scrollView;
+@synthesize scrollViewContentView;
+
+@synthesize removePlayerButton;
 
 @synthesize continueButton;
 
@@ -29,143 +34,102 @@
     continueButton.enabled = NO;
     continueButton.alpha = 0.4f;
     
-    [self clearExistingInformation];
+    playerCount = 4;
     
-    [self addPlayerCountStepper];
-    [self buildEntryFormForNumberOfPlayers:playerCountStepper.value];
+    players = [NSMutableArray array];
+    playerHolders = [NSMutableArray array];
+        
+    [self buildEntryFormForNumberOfPlayers:playerCount];
     
     UIGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mainViewTap)];
     [self.view addGestureRecognizer:tapRecognizer];
-    
-    bannerIsVisible = NO;
-    self.banner.delegate = self;
-}
-
-- (void)clearExistingInformation {
-    existingInformation = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], nil];
-}
-
-- (void)addPlayerCountStepper {
-    playerCountStepper = [[UIStepper alloc] init];
-    playerCountStepper.frame = CGRectMake(CGRectGetMidX(self.view.frame)-(CGRectGetWidth(playerCountStepper.frame)/2), 10, CGRectGetWidth(playerCountStepper.frame), CGRectGetHeight(playerCountStepper.frame));
-    playerCountStepper.value = 4.0;
-    playerCountStepper.minimumValue = 3.0;
-    playerCountStepper.tag = -1;
-    [playerCountStepper addTarget:self action:@selector(playerCountChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:playerCountStepper];
 }
 
 - (void)buildEntryFormForNumberOfPlayers:(int)numberOfPlayers {
-    UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(playerCountStepper.frame)+10, self.view.frame.size.width, (self.view.frame.size.height-64)-(self.view.frame.size.height-CGRectGetMinY(continueButton.frame)))];
-    scroller.tag = -2;
-    
-    int playerHolderWidth = 0;
+    NSLayoutAnchor *aboveAnchor = scrollViewContentView.topAnchor;
+    NSLayoutConstraint *belowAnchorConstraint;
     for (int i=0; i<numberOfPlayers; i++) {
-        UIView *playerHolder = [[UIView alloc] init];
-        playerHolder.tag = i+1;
-        
-        UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, screenSize.height/3, 20)];
-        nameField.delegate = self;
-        nameField.backgroundColor = [UIColor lightGrayColor];
-        nameField.tag = playerHolder.tag+100;
-        nameField.text = @"";
-        [nameField addTarget:self action:@selector(nameFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
-        
-        NSArray *existingNames = [NSArray arrayWithArray:[existingInformation objectAtIndex:0]];
-        NSArray *existingSkills = [NSArray arrayWithArray:[existingInformation objectAtIndex:1]];
-        
-        NSLog(@"%@ : %i", existingNames, existingNames.count);
-        
-        if (i < existingNames.count)
-            nameField.text = [existingNames objectAtIndex:i];
-        playerHolderWidth = CGRectGetMaxX(nameField.frame);
-        
-        if (selectionType == SELECTION_TYPE_SKILL) {
-            UITextField *skillField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(nameField.frame)+10, 0, screenSize.width/10, CGRectGetHeight(nameField.frame))];
-            skillField.delegate = self;
-            skillField.backgroundColor = [UIColor lightGrayColor];
-            skillField.keyboardType = UIKeyboardTypeNumberPad;
-            skillField.tag = playerHolder.tag+1000;
-            skillField.text = @"0";
-            if (i < existingSkills.count)
-                skillField.text = [[existingSkills objectAtIndex:i] stringValue];
-            
-            [playerHolder addSubview:skillField];
-            playerHolderWidth = CGRectGetMaxX(skillField.frame);
+        PlayerHolder *playerHolder;
+        if (i < playerHolders.count) {
+            playerHolder = playerHolders[i];
+        } else {
+            playerHolder = [[PlayerHolder alloc] initWithSelectionType:selectionType];
+            [playerHolders addObject:playerHolder];
         }
         
-        playerHolder.frame = CGRectMake(CGRectGetMidX(scroller.frame)-(playerHolderWidth/2), (i*30), playerHolderWidth, 20);
-        [playerHolder addSubview:nameField];
+        if (selectionType == SELECTION_TYPE_SKILL) {
+            playerHolder.skillField.delegate = self;
+        }
         
-        [scroller addSubview:playerHolder];
-        scroller.contentSize = CGSizeMake(CGRectGetWidth(scroller.frame), CGRectGetMaxY(playerHolder.frame)+10);
+        playerHolder.nameField.delegate = self;
+
+        [playerHolder.nameField addTarget:self action:@selector(nameFieldTextChanged:) forControlEvents:UIControlEventEditingChanged];
+        
+        [scrollViewContentView addSubview:playerHolder];
+        
+        [NSLayoutConstraint activateConstraints: @[
+           [playerHolder.leadingAnchor constraintEqualToAnchor:scrollViewContentView.leadingAnchor constant:20], [scrollViewContentView.trailingAnchor constraintEqualToAnchor:playerHolder.trailingAnchor constant:20], [playerHolder.topAnchor constraintEqualToAnchor:aboveAnchor constant:20], [playerHolder.heightAnchor constraintEqualToConstant:20]
+        ]];
+        
+        aboveAnchor = playerHolder.bottomAnchor;
+        
+        if (belowAnchorConstraint != nil) {
+            [scrollViewContentView removeConstraint:belowAnchorConstraint];
+        }
+        
+        belowAnchorConstraint = [scrollViewContentView.bottomAnchor constraintEqualToAnchor:playerHolder.bottomAnchor constant:20];
+        
+        [NSLayoutConstraint activateConstraints:@[belowAnchorConstraint]];
     }
-    
-    [self.view addSubview:scroller];
 }
 
 - (BOOL)completionTest {
-    BOOL pass = YES;
-    
-    [self clearExistingInformation];
-    UIScrollView *scroller = (UIScrollView *)[self.view viewWithTag:-2];
-    
-    for (UIView *playerHolder in scroller.subviews) {
-        UITextField *nameField = (UITextField *)[playerHolder viewWithTag:playerHolder.tag+100];
-        if ([nameField.text isEqualToString:@""])
-            pass = NO;
+    for (PlayerHolder *playerHolder in playerHolders) {
+        if ([playerHolder.nameField.text isEqualToString:@""]) {
+            return NO;
+        }
     }
-    return pass;
+    return YES;
 }
 
-- (void)playerCountChanged:(UIStepper *)stepper {
-    [self clearExistingInformation];
-    UIScrollView *scroller = (UIScrollView *)[self.view viewWithTag:-2];
+- (void)playerCountChanged {
+    NSMutableArray *playerHoldersToRemove = [NSMutableArray array];
     
-    for (UIView *playerHolder in scroller.subviews) {
-        UITextField *nameField = (UITextField *)[playerHolder viewWithTag:playerHolder.tag+100];
-        UITextField *skillField = (UITextField *)[playerHolder viewWithTag:playerHolder.tag+1000];
+    for (PlayerHolder *playerHolder in playerHolders) {
+        NSUInteger i = [playerHolders indexOfObject:playerHolder];
         
-        if ([nameField.text isEqualToString:@""] || nameField.text == nil)
-            NSLog(@"fixed");
-        else
-            NSLog(@"completed %@", nameField.text);
-        
-        if (nameField.text != nil) {
-            NSMutableArray *existingNames = [NSMutableArray arrayWithArray:[existingInformation objectAtIndex:0]];
-            [existingNames addObject:nameField.text];
-            [existingInformation replaceObjectAtIndex:0 withObject:existingNames];
-        }
-        if (skillField.text != nil) {
-            NSMutableArray *existingSkills = [NSMutableArray arrayWithArray:[existingInformation objectAtIndex:1]];
-            [existingSkills addObject:[NSNumber numberWithInt:skillField.text.intValue]];
-            [existingInformation replaceObjectAtIndex:1 withObject:existingSkills];
+        if (playerHolder.nameField.text != nil) {
+            Player *player = [[Player alloc] init];
+            player.name = playerHolder.nameField.text;
+            
+            if (playerHolder.skillField.text != nil) {
+                player.skill = playerHolder.skillField.text.intValue;
+            }
+            
+            [players addObject:player];
         }
         
+        [playerHolder removeFromSuperview];
         
-        NSLog(@"%@ : %i", [existingInformation objectAtIndex:0], [[existingInformation objectAtIndex:0] count]);
+        if (i >= playerCount) {
+            [playerHoldersToRemove addObject:playerHolder];
+        }
     }
     
-    for (UIView *view in scroller.subviews) {
-        [view removeFromSuperview];
-    }
+    [playerHolders removeObjectsInArray:playerHoldersToRemove];
     
-    [scroller removeFromSuperview];
-    
-    [self buildEntryFormForNumberOfPlayers:stepper.value];
+    [self buildEntryFormForNumberOfPlayers:playerCount];
 }
 
 - (void)mainViewTap {
     [textFieldInEdit resignFirstResponder];
-    NSLog(@"tapped");
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     textFieldInEdit = textField;
-    NSLog(@"selected");
 }
 
-- (void)nameFieldTextChanged:(UITextField *)textField {
+- (void)updateContinueButton {
     if ([self completionTest]) {
         continueButton.enabled = YES;
         continueButton.alpha = 1.0f;
@@ -173,64 +137,55 @@
         continueButton.enabled = NO;
         continueButton.alpha = 0.4f;
     }
+}
+
+- (void)nameFieldTextChanged:(UITextField *)textField {
+    [self updateContinueButton];
+}
+
+- (IBAction)addPlayerPressed:(UIButton *)button {
+    playerCount++;
     
+    [self playerCountChanged];
+    
+    if (playerCount > 3) {
+        removePlayerButton.enabled = true;
+    }
+    
+    [self updateContinueButton];
+}
+
+- (IBAction)removePlayerPressed:(UIButton *)button {
+    if (playerCount > 3) {
+        playerCount--;
+        
+        [self playerCountChanged];
+    }
+    
+    if (playerCount == 3) {
+        removePlayerButton.enabled = false;
+    }
+
+    [self updateContinueButton];
 }
 
 - (IBAction)continuePressed:(UIButton *)button {
     if ([self completionTest]) {
         players = [NSMutableArray array];
-        for (UIView *scroller in self.view.subviews) {
-            for (UIView *container in scroller.subviews) {
-                for (UIView *view in container.subviews) {
-                    if (view.tag > 0 && view.tag < 1000) {
-                        UITextField *nameField = (UITextField *)view;
-                        Player *newPlayer = [[Player alloc] init];
-                        newPlayer.name = nameField.text;
-                        if (selectionType == SELECTION_TYPE_SKILL) {
-                            UITextField *skillField = (UITextField *)[self.view viewWithTag:view.tag+900];
-                            newPlayer.skill = skillField.text.intValue;
-                        }
-                        [players addObject:newPlayer];
-                        NSLog(@"added player");
-                    }
-                }
-            }
+
+        for (PlayerHolder *playerHolder in playerHolders) {
+            Player *player = [[Player alloc] init];
+            
+            player.name = playerHolder.nameField.text;
+            player.skill = playerHolder.skillField.text.intValue;
+            
+            [players addObject:player];
         }
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incomplete Form"
-                                                        message:@"One or more fields have not been filled out properly."
-                                                       delegate:self
-                                              cancelButtonTitle:@"ok"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-    
-    for (Player *player in players) {
-        NSLog(@"name : %@   skill : %i", player.name, player.skill);
     }
 }
 
 - (IBAction)skillBasedPressed:(UIButton *)button {
-    NSLog(@"skill");
     selectionType = SELECTION_TYPE_SKILL;
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
-    if (!bannerIsVisible) {
-        NSLog(@"bannerViewDidLoadAd");
-        
-        bannerIsVisible = YES;
-        banner.hidden = NO;
-    }
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    if (bannerIsVisible) {
-        NSLog(@"bannerView:didFailToReceiveAdWithError:");
-        
-        bannerIsVisible = NO;
-        banner.hidden = YES;
-    }
 }
 
 @end

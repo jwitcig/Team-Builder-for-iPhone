@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1690E27BFB9D6E341EB35B /* libPods-Team Builder for iPhoneTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75201B32A2D686E1FD905DCA /* libPods-Team Builder for iPhoneTests.a */; };
 		8B4E87EC189757CF00879FB5 /* ic_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B4E87EB189757CF00879FB5 /* ic_launcher.png */; };
 		8B4E87EE18975B0A00879FB5 /* largeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B4E87ED18975B0A00879FB5 /* largeIcon.png */; };
 		8B52185B1878A6DB00BCE0DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B52185A1878A6DB00BCE0DB /* Foundation.framework */; };
@@ -17,16 +18,16 @@
 		8B52186B1878A6DB00BCE0DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B52186A1878A6DB00BCE0DB /* AppDelegate.m */; };
 		8B52186E1878A6DB00BCE0DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B52186C1878A6DB00BCE0DB /* Main.storyboard */; };
 		8B5218711878A6DB00BCE0DB /* TypeSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5218701878A6DB00BCE0DB /* TypeSelectionViewController.m */; };
-		8B5218731878A6DB00BCE0DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B5218721878A6DB00BCE0DB /* Images.xcassets */; };
 		8B52187A1878A6DB00BCE0DB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5218791878A6DB00BCE0DB /* XCTest.framework */; };
 		8B52187B1878A6DB00BCE0DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B52185A1878A6DB00BCE0DB /* Foundation.framework */; };
 		8B52187C1878A6DB00BCE0DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B52185E1878A6DB00BCE0DB /* UIKit.framework */; };
 		8B5218841878A6DB00BCE0DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8B5218821878A6DB00BCE0DB /* InfoPlist.strings */; };
 		8B5218861878A6DB00BCE0DB /* Team_Builder_for_iPhoneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5218851878A6DB00BCE0DB /* Team_Builder_for_iPhoneTests.m */; };
+		8B539EDC1CA5150B0025BBFE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B539EDB1CA5150B0025BBFE /* Images.xcassets */; };
+		8B539EDF1CA5DA570025BBFE /* PlayerHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B539EDE1CA5DA570025BBFE /* PlayerHolder.m */; };
 		8B6903801878AE9B00CA3B7B /* PlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B69037F1878AE9B00CA3B7B /* PlayersViewController.m */; };
 		8B6903831878B88900CA3B7B /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B6903821878B88900CA3B7B /* Player.m */; };
 		8B690386187B3FCC00CA3B7B /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B690385187B3FCC00CA3B7B /* ResultViewController.m */; };
-		8BACB6361971F4CC00BEB1DC /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BACB6351971F4CC00BEB1DC /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		75201B32A2D686E1FD905DCA /* libPods-Team Builder for iPhoneTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Team Builder for iPhoneTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8952359A0BEF4C5283D274E8 /* libPods-Team Builder for iPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Team Builder for iPhone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B4E87EB189757CF00879FB5 /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		8B4E87ED18975B0A00879FB5 /* largeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeIcon.png; sourceTree = "<group>"; };
 		8B5218571878A6DB00BCE0DB /* Team Builder for iPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Team Builder for iPhone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,12 +58,14 @@
 		8B52186D1878A6DB00BCE0DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B52186F1878A6DB00BCE0DB /* TypeSelectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeSelectionViewController.h; sourceTree = "<group>"; };
 		8B5218701878A6DB00BCE0DB /* TypeSelectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeSelectionViewController.m; sourceTree = "<group>"; };
-		8B5218721878A6DB00BCE0DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8B5218781878A6DB00BCE0DB /* Team Builder for iPhoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Team Builder for iPhoneTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5218791878A6DB00BCE0DB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8B5218811878A6DB00BCE0DB /* Team Builder for iPhoneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Team Builder for iPhoneTests-Info.plist"; sourceTree = "<group>"; };
 		8B5218831878A6DB00BCE0DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8B5218851878A6DB00BCE0DB /* Team_Builder_for_iPhoneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Team_Builder_for_iPhoneTests.m; sourceTree = "<group>"; };
+		8B539EDB1CA5150B0025BBFE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8B539EDD1CA5DA570025BBFE /* PlayerHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerHolder.h; sourceTree = "<group>"; };
+		8B539EDE1CA5DA570025BBFE /* PlayerHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerHolder.m; sourceTree = "<group>"; };
 		8B69037E1878AE9B00CA3B7B /* PlayersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayersViewController.h; sourceTree = "<group>"; };
 		8B69037F1878AE9B00CA3B7B /* PlayersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayersViewController.m; sourceTree = "<group>"; };
 		8B6903811878B88900CA3B7B /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -75,7 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BACB6361971F4CC00BEB1DC /* iAd.framework in Frameworks */,
 				8B52185D1878A6DB00BCE0DB /* CoreGraphics.framework in Frameworks */,
 				8B52185F1878A6DB00BCE0DB /* UIKit.framework in Frameworks */,
 				8B52185B1878A6DB00BCE0DB /* Foundation.framework in Frameworks */,
@@ -89,6 +93,7 @@
 				8B52187A1878A6DB00BCE0DB /* XCTest.framework in Frameworks */,
 				8B52187C1878A6DB00BCE0DB /* UIKit.framework in Frameworks */,
 				8B52187B1878A6DB00BCE0DB /* Foundation.framework in Frameworks */,
+				7E1690E27BFB9D6E341EB35B /* libPods-Team Builder for iPhoneTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +127,8 @@
 				8B52185C1878A6DB00BCE0DB /* CoreGraphics.framework */,
 				8B52185E1878A6DB00BCE0DB /* UIKit.framework */,
 				8B5218791878A6DB00BCE0DB /* XCTest.framework */,
+				8952359A0BEF4C5283D274E8 /* libPods-Team Builder for iPhone.a */,
+				75201B32A2D686E1FD905DCA /* libPods-Team Builder for iPhoneTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,7 +147,9 @@
 				8B690385187B3FCC00CA3B7B /* ResultViewController.m */,
 				8B6903811878B88900CA3B7B /* Player.h */,
 				8B6903821878B88900CA3B7B /* Player.m */,
-				8B5218721878A6DB00BCE0DB /* Images.xcassets */,
+				8B539EDD1CA5DA570025BBFE /* PlayerHolder.h */,
+				8B539EDE1CA5DA570025BBFE /* PlayerHolder.m */,
+				8B539EDB1CA5150B0025BBFE /* Images.xcassets */,
 				8B5218611878A6DB00BCE0DB /* Supporting Files */,
 			);
 			path = "Team Builder for iPhone";
@@ -201,9 +210,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B52188C1878A6DB00BCE0DB /* Build configuration list for PBXNativeTarget "Team Builder for iPhoneTests" */;
 			buildPhases = (
+				68E593A7B4DD6240B93CDD2B /* [CP] Check Pods Manifest.lock */,
 				8B5218741878A6DB00BCE0DB /* Sources */,
 				8B5218751878A6DB00BCE0DB /* Frameworks */,
 				8B5218761878A6DB00BCE0DB /* Resources */,
+				83136AE338B01E2037A4D99D /* [CP] Embed Pods Frameworks */,
+				0B25B29692A4792AEEF4BA8C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,7 +237,7 @@
 				ORGANIZATIONNAME = "Jwit Apps";
 				TargetAttributes = {
 					8B5218561878A6DB00BCE0DB = {
-						DevelopmentTeam = 7R899BEBGC;
+						DevelopmentTeam = 349WFX4WJR;
 					};
 					8B5218771878A6DB00BCE0DB = {
 						TestTargetID = 8B5218561878A6DB00BCE0DB;
@@ -256,8 +268,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B5218731878A6DB00BCE0DB /* Images.xcassets in Resources */,
 				8B5218651878A6DB00BCE0DB /* InfoPlist.strings in Resources */,
+				8B539EDC1CA5150B0025BBFE /* Images.xcassets in Resources */,
 				8B4E87EE18975B0A00879FB5 /* largeIcon.png in Resources */,
 				8B52186E1878A6DB00BCE0DB /* Main.storyboard in Resources */,
 				8B4E87EC189757CF00879FB5 /* ic_launcher.png in Resources */,
@@ -274,6 +286,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B25B29692A4792AEEF4BA8C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Team Builder for iPhoneTests/Pods-Team Builder for iPhoneTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68E593A7B4DD6240B93CDD2B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		83136AE338B01E2037A4D99D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Team Builder for iPhoneTests/Pods-Team Builder for iPhoneTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B5218531878A6DB00BCE0DB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -281,6 +341,7 @@
 			files = (
 				8B5218711878A6DB00BCE0DB /* TypeSelectionViewController.m in Sources */,
 				8B6903801878AE9B00CA3B7B /* PlayersViewController.m in Sources */,
+				8B539EDF1CA5DA570025BBFE /* PlayerHolder.m in Sources */,
 				8B52186B1878A6DB00BCE0DB /* AppDelegate.m in Sources */,
 				8B5218671878A6DB00BCE0DB /* main.m in Sources */,
 				8B6903831878B88900CA3B7B /* Player.m in Sources */,
@@ -411,14 +472,16 @@
 		8B52188A1878A6DB00BCE0DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wendy Witcig (SAE38G688R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Team Builder for iPhone/Team Builder for iPhone-Prefix.pch";
 				INFOPLIST_FILE = "Team Builder for iPhone/Team Builder for iPhone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01737D7E-7BC7-4355-9B1D-93DA1CA30DE3";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -426,14 +489,16 @@
 		8B52188B1878A6DB00BCE0DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wendy Witcig (SAE38G688R)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Team Builder for iPhone/Team Builder for iPhone-Prefix.pch";
 				INFOPLIST_FILE = "Team Builder for iPhone/Team Builder for iPhone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01737D7E-7BC7-4355-9B1D-93DA1CA30DE3";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
